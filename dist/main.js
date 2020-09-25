@@ -137,6 +137,7 @@ sdk.getData(function (data) {
 	height = data.height || 300;
 	zoom = data.zoom || 15;
 	link = data.link || '';
+	url = data.url;
 	mapsKey = data.mapsKey || localStorage.getItem('googlemapsapikeyforblock');
 	paintSettings();
 	paintSliderValues();
