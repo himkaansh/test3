@@ -14,6 +14,7 @@
 /******/ 			i: moduleId,
 /******/ 			l: false,
 /******/ 			exports: {}
+
 /******/ 		};
 /******/
 /******/ 		// Execute the module function
@@ -116,6 +117,7 @@ function paintMap() {
 	var url = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
 		address.split(' ').join('+') + '&size=' + width + 'x' + height + '&zoom=' + zoom +
 		'&markers=' + address.split(' ').join('+') + '&key=' + mapsKey;
+	var url = 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
 	sdk.setContent('<a href="' + link + '"><img src="' + url + '" /></a>');
 	sdk.setData({
 		address: address,
@@ -123,7 +125,8 @@ function paintMap() {
 		height: height,
 		zoom: zoom,
 		link: link,
-		mapsKey: mapsKey
+		mapsKey: mapsKey,
+		url: url
 	});
 	localStorage.setItem('googlemapsapikeyforblock', mapsKey);
 }
