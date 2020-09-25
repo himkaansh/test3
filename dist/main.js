@@ -93,6 +93,8 @@ function debounce (func, wait, immediate) {
 function paintSettings () {
 	document.getElementById('text-input-id-0').value = mapsKey;
 	document.getElementById('text-input-id-1').value = address;
+	document.getElementById('text-input-id-0_1').value = imageurl;
+	document.getElementById('text-input-id-1_1').value = imagehyperlink;
 	document.getElementById('slider-id-01').value = width;
 	document.getElementById('slider-id-02').value = height;
 	document.getElementById('slider-id-03').value = zoom;
@@ -111,22 +113,26 @@ function paintMap() {
 	height = document.getElementById('slider-id-02').value;
 	zoom = document.getElementById('slider-id-03').value;
 	link = document.getElementById('text-input-id-2').value;
+	imageurl = document.getElementById('text-input-id-0_1').value;
+	imagehyperlink = document.getElementById('text-input-id-1_1').value;
 	if (!address) {
 		return;
 	}
 	var url = 'https://maps.googleapis.com/maps/api/staticmap?center=' +
 		address.split(' ').join('+') + '&size=' + width + 'x' + height + '&zoom=' + zoom +
 		'&markers=' + address.split(' ').join('+') + '&key=' + mapsKey;
-	var url = 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
-	sdk.setContent('<a href="' + link + '"><img src="' + url + '" /></a>');
+	var url = imageurl;
+	sdk.setContent('<a href="' + imagehyperlink + '"><img src="' + url + '" /></a>');
 	sdk.setData({
-		address: address,
+		imagehyperlink: imagehyperlink,
 		width: width,
 		height: height,
 		zoom: zoom,
 		link: link,
+		imageurl: imageurl,
+		url: url,
 		mapsKey: mapsKey,
-		url: url
+		address: address
 	});
 	localStorage.setItem('googlemapsapikeyforblock', mapsKey);
 }
@@ -138,6 +144,8 @@ sdk.getData(function (data) {
 	zoom = data.zoom || 15;
 	link = data.link || '';
 	url = data.url;
+	imageurl = data.imageurl;
+	imagehyperlink = data.imagehyperlink;
 	mapsKey = data.mapsKey || localStorage.getItem('googlemapsapikeyforblock');
 	paintSettings();
 	paintSliderValues();
